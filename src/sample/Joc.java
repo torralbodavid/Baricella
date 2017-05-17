@@ -173,7 +173,7 @@ public class Joc {
         Random random = new Random();
 
         /* Generem la X i la Y on la coordenada mínima serà el radi dels cercles, i la màxima serà la mida de la pantalla del joc menys el radi multiplicat per el nombre aleatori */
-        double randomX = figura[0].getRadius() + ((PanellJoc.getLayoutBounds().getMaxX() -figura[0].getRadius()) - figura[0].getRadius()) * random.nextDouble();
+        double randomX = figura[0].getRadius() + ((PanellJoc.getLayoutBounds().getMaxX() - figura[0].getRadius()) - figura[0].getRadius()) * random.nextDouble();
         double randomY = figura[0].getRadius() + ((PanellJoc.getLayoutBounds().getMaxY() - figura[0].getRadius()) - figura[0].getRadius()) * random.nextDouble();
 
         /*double randomX = (PanellJoc.getLayoutBounds().getMaxX()) * r.nextDouble();
@@ -241,7 +241,7 @@ public class Joc {
 
     }
 
-    public static void mostraAlerta(){
+    public static void mostraAlerta(String menuNom){
          /*diàleg de gravar la partida*/
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Heu aconseguit "+punts+" punts!");
@@ -253,7 +253,7 @@ public class Joc {
         // The Java 8 way to get the response value (with lambda expression).
         result.ifPresent(name -> {
             try {
-                guardaResultats(name, punts);
+                guardaResultats(name, punts, menuNom);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -266,7 +266,7 @@ public class Joc {
     /*
         Guarda els rècords de l'usuari en un arxiu XML.
      */
-    public static void guardaResultats(String nom, int punts) throws IOException {
+    public static void guardaResultats(String nom, int punts, String menuNom) throws IOException {
 
         try {
 
@@ -284,6 +284,7 @@ public class Joc {
             Element usuari = new Element("usuari");
             usuari.setAttribute("nom", nom);
             usuari.setAttribute("puntuacio", String.valueOf(punts));
+            usuari.setAttribute("nivell", menuNom);
             root.addContent(usuari);
 
             XMLOutputter xmlOutput = new XMLOutputter();
@@ -311,8 +312,8 @@ public class Joc {
     public static String formataTemps(int segons)
     {
         int segonsInicials = segons;
-        int hours = (int) segonsInicials / 3600;
-        int remainder = (int) segonsInicials - hours * 3600;
+        int hours = segonsInicials / 3600;
+        int remainder = segonsInicials - hours * 3600;
         int mins = remainder / 60;
         remainder = remainder - mins * 60;
         int secs = remainder;

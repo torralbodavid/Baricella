@@ -108,17 +108,27 @@ public class Controller {
     private TableView<Integer> taulaRanquing = new TableView<>();
 
     @FXML
-    private TableColumn<Integer, Number> columnaNom = new TableColumn<>();
+    private TableColumn<Integer, String> columnaNom = new TableColumn<>();
 
     @FXML
     private TableColumn<Integer, String> columnaPunts = new TableColumn<>();
 
+    @FXML
+    private TableColumn<Integer, String> columnaNivell = new TableColumn<>();
+
+    private String menuNom;
 
     public Joc partida = new Joc();
 
 
     @FXML
     void iniciaJoc(ActionEvent event) {
+
+        columnaNom.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+        columnaPunts.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+        columnaNivell.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+
+        Ranquing.emplenaRanquing(taulaRanquing, columnaNom, columnaPunts, columnaNivell);
 
         Circle[] puntssArray = {puntVermell1, puntVermell2, puntVermell3, puntVermell4, puntVermell5, puntVermell6, puntVermell7, puntVermell8, puntVermell9, puntVermell10, puntVermell11, puntVermell12, puntVermell13, puntVermell14, puntVermell15, puntVermell16, puntVermell17, puntVermell18, puntVermell19, puntVermell20};
         int dificultat = 0;
@@ -127,7 +137,7 @@ public class Controller {
         Comprovem quin menú s'ha clicat
          */
         MenuItem menuEscollit = (MenuItem) event.getSource();
-
+        menuNom = menuEscollit.getText();
 
         switch (menuEscollit.getId()){
             case "mItemPrincipiant":
@@ -302,7 +312,10 @@ public class Controller {
 
     @FXML
     void guardaRecord(MouseEvent event) {
-        partida.mostraAlerta();
+        /*
+        Comprovem quin menú s'ha clicat
+         */
+        partida.mostraAlerta(menuNom);
         btnGuardaRecord.setVisible(false);
     }
 

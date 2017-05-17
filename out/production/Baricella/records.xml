@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RECORDS>
   <USUARIS>
-    <usuari nom="David" puntuacio="46" />
-    <usuari nom="mm" puntuacio="14" />
+    <usuari nom="david" puntuacio="2" nivell="Infern" />
+    <usuari nom="torralbo" puntuacio="3" nivell="Malson" />
   </USUARIS>
 </RECORDS>

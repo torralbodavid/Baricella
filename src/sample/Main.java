@@ -16,7 +16,6 @@ public class Main extends Application {
         primaryStage.setTitle("Joc de la Barciel·la");
         primaryStage.setScene(new Scene(root, 300, 275));
 
-
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
         //set Stage boundaries to visible bounds of the main screen
