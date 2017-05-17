@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -107,22 +105,14 @@ public class Controller {
     private Button btnGuardaRecord;
 
     @FXML
-    private TableView<Person> taulaRanquing = new TableView<Person>();
+    private TableView<Integer> taulaRanquing = new TableView<>();
 
     @FXML
-    private TableColumn columnaNom;
+    private TableColumn<Integer, Number> columnaNom = new TableColumn<>();
 
     @FXML
-    private TableColumn columnaPunts;
+    private TableColumn<Integer, String> columnaPunts = new TableColumn<>();
 
-    private final ObservableList<Person> data =
-            FXCollections.observableArrayList(
-                    new Person("A", "Z", "a@example.com"),
-                    new Person("B", "X", "b@example.com"),
-                    new Person("C", "W", "c@example.com"),
-                    new Person("D", "Y", "d@example.com"),
-                    new Person("E", "V", "e@example.com")
-            );
 
     public Joc partida = new Joc();
 
@@ -137,10 +127,6 @@ public class Controller {
         Comprovem quin menú s'ha clicat
          */
         MenuItem menuEscollit = (MenuItem) event.getSource();
-
-       /* taulaRanquing.setItems(data);
-        taulaRanquing.getColumns().addAll(columnaNom, columnaPunts);
-        data.add(new Person("new","new"));*/
 
 
         switch (menuEscollit.getId()){

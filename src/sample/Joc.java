@@ -32,84 +32,80 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 public class Joc {
 
-    public static int iterate, figuresSortints, punts, figuresRestantsEnPantalla, segons;
-    public static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    public static Timeline comptadorSegons;
-    public static Timer figuresPantalla;
+    private static int iterate, figuresSortints, punts, figuresRestantsEnPantalla, segons;
+    private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private static Timeline comptadorSegons;
+    private static Timer figuresPantalla;
 
 
     /*
             Donem un valor per defecte a les variables.
              */
     public Joc() {
-        this.iterate = 1;
-        this.figuresSortints = 1;
-        this.punts = 0;
-        this.figuresRestantsEnPantalla = 0;
-        this.segons = 60;
+        iterate = 1;
+        figuresSortints = 1;
+        punts = 0;
+        figuresRestantsEnPantalla = 0;
+        segons = 60;
     }
 
-    public static Timer getFiguresPantalla() {
+    private static Timer getFiguresPantalla() {
         return figuresPantalla;
     }
 
-    public static void setFiguresPantalla(Timer figuresPantalla) {
+    private static void setFiguresPantalla(Timer figuresPantalla) {
         Joc.figuresPantalla = figuresPantalla;
     }
 
-    public static int getIterate() {
+    private static int getIterate() {
         return iterate;
     }
 
-    public static void setIterate(int iterate) {
+    private static void setIterate(int iterate) {
         Joc.iterate = iterate;
     }
 
-    public static int getFiguresSortints() {
+    private static int getFiguresSortints() {
         return figuresSortints;
     }
 
-    public static void setFiguresSortints(int figuresSortints) {
+    private static void setFiguresSortints(int figuresSortints) {
         Joc.figuresSortints = figuresSortints;
     }
 
-    public static int getPunts() {
+    private static int getPunts() {
         return punts;
     }
 
-    public static void setPunts(int punts) {
+    private static void setPunts(int punts) {
         Joc.punts = punts;
     }
 
-    public static int getFiguresRestantsEnPantalla() {
+    private static int getFiguresRestantsEnPantalla() {
         return figuresRestantsEnPantalla;
     }
 
-    public static void setFiguresRestantsEnPantalla(int figuresRestantsEnPantalla) {
+    private static void setFiguresRestantsEnPantalla(int figuresRestantsEnPantalla) {
         Joc.figuresRestantsEnPantalla = figuresRestantsEnPantalla;
     }
 
-    public static int getSegons() {
+    private static int getSegons() {
         return segons;
     }
 
-    public static void setSegons(int segons) {
+    private static void setSegons(int segons) {
         Joc.segons = segons;
     }
 
-    public static ScheduledExecutorService getScheduler() {
-        return scheduler;
-    }
-
-    public static void setScheduler(ScheduledExecutorService scheduler) {
+    private static void setScheduler(ScheduledExecutorService scheduler) {
         Joc.scheduler = scheduler;
     }
 
-    public static Timeline getComptadorSegons() {
+    private static Timeline getComptadorSegons() {
         return comptadorSegons;
     }
 
-    public static void setComptadorSegons(Timeline comptadorSegons) {
+    private static void setComptadorSegons(Timeline comptadorSegons) {
         Joc.comptadorSegons = comptadorSegons;
     }
 
@@ -307,6 +303,7 @@ public class Joc {
 
 
     }
+
 
     /*
     Passa els segons a hores, minuts i segons.
