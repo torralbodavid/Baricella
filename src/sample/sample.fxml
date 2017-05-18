@@ -18,15 +18,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="VBoxPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox fx:id="VBoxPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@estils.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <HBox fx:id="HBoxMenu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
             <MenuBar maxWidth="1.7976931348623157E308" useSystemMenuBar="no" HBox.hgrow="ALWAYS">
                <menus>
-                  <Menu mnemonicParsing="false" text="Jugar">
+                  <Menu fx:id="menuJugar" mnemonicParsing="false" text="Jugar">
                      <items>
-                        <Menu mnemonicParsing="false" text="Nova Partida">
+                        <Menu fx:id="menuNovaPartida" mnemonicParsing="false" text="Nova Partida">
                           <items>
                               <MenuItem fx:id="mItemPrincipiant" mnemonicParsing="false" onAction="#iniciaJoc" text="Principiant" />
                               <MenuItem fx:id="mItemNormal" mnemonicParsing="false" onAction="#iniciaJoc" text="Normal" />
@@ -37,14 +37,14 @@
                         </Menu>
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Idioma">
+                  <Menu mnemonicParsing="false" text="Idioma" visible="false">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Català" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Ajuda">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Crèdits" />
+                        <MenuItem fx:id="menuCredits" mnemonicParsing="false" onAction="#mostraCredits" text="Crèdits" />
                      </items>
                   </Menu>
                </menus>

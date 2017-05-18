@@ -2,12 +2,15 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 public class Controller {
 
@@ -16,6 +19,9 @@ public class Controller {
 
     @FXML
     private HBox HBoxMenu;
+
+    @FXML
+    private Menu menuNovaPartida;
 
     @FXML
     private MenuItem mItemPrincipiant;
@@ -105,6 +111,9 @@ public class Controller {
     private Button btnGuardaRecord;
 
     @FXML
+    private MenuItem menuCredits;
+
+    @FXML
     private TableView<Integer> taulaRanquing = new TableView<>();
 
     @FXML
@@ -123,19 +132,21 @@ public class Controller {
 
     @FXML
     void iniciaJoc(ActionEvent event) {
-
         columnaNom.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
         columnaPunts.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
         columnaNivell.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
 
         Ranquing.emplenaRanquing(taulaRanquing, columnaNom, columnaPunts, columnaNivell);
 
+        /* Desactiva el menú de nova partida un cop començada */
+        menuNovaPartida.setDisable(true);
+
         Circle[] puntssArray = {puntVermell1, puntVermell2, puntVermell3, puntVermell4, puntVermell5, puntVermell6, puntVermell7, puntVermell8, puntVermell9, puntVermell10, puntVermell11, puntVermell12, puntVermell13, puntVermell14, puntVermell15, puntVermell16, puntVermell17, puntVermell18, puntVermell19, puntVermell20};
-        int dificultat = 0;
 
         /*
-        Comprovem quin menú s'ha clicat
+        Comprovem quin menú s'ha clicat i li afegim la dificultat en milisegons.
          */
+        int dificultat = 0;
         MenuItem menuEscollit = (MenuItem) event.getSource();
         menuNom = menuEscollit.getText();
 
@@ -163,8 +174,8 @@ public class Controller {
         }
 
 
-        partida.comptador(lblSegons, btnGuardaRecord, puntssArray);
-        partida.dificultat(puntssArray, PanellJoc, btnGuardaRecord, dificultat);
+        partida.comptador(lblSegons, btnGuardaRecord, puntssArray, menuNovaPartida);
+        partida.dificultat(puntssArray, PanellJoc, btnGuardaRecord, dificultat, menuNovaPartida);
 
     }
 
@@ -318,5 +329,19 @@ public class Controller {
         partida.mostraAlerta(menuNom);
         btnGuardaRecord.setVisible(false);
     }
+
+    @FXML
+    void mostraCredits(ActionEvent event) {
+
+        Notifications.create()
+                .title("Joc de la Baricel·la")
+                .text("\nDesenvolupat per David Torralbo mitjançant JavaFX.\n\u00a9 2017.")
+                .position(Pos.BOTTOM_CENTER)
+                .hideAfter(Duration.seconds(5))
+                .darkStyle()
+                .show();
+
+    }
+
 
 }

@@ -1,10 +1,12 @@
 package sample;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -112,7 +114,7 @@ public class Joc {
     /*
               Comptador de temps.
                  */
-    public static void comptador(Label lblSegons, Button btnGuardar, Circle puntsArray[]) {
+    public static void comptador(Label lblSegons, Button btnGuardar, Circle puntsArray[], Menu menuNovaPartida) {
 
         setComptadorSegons(new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             comptarSegons(lblSegons);
@@ -120,7 +122,7 @@ public class Joc {
         getComptadorSegons().setCycleCount(61);
         getComptadorSegons().play();
         getComptadorSegons().setOnFinished((ActionEvent event) -> {
-            finalitzarJoc(btnGuardar, puntsArray);
+            finalitzarJoc(btnGuardar, puntsArray, menuNovaPartida);
         });
 
     }
@@ -129,7 +131,7 @@ public class Joc {
     /*
         Nivells de dificultat.
      */
-    public static void dificultat(Circle punts[], Pane PanellJoc, Button btnGuardar, int dificultat) {
+    public static void dificultat(Circle punts[], Pane PanellJoc, Button btnGuardar, int dificultat, Menu menuNovaPartida) {
 
         /* reinicialitza el joc */
         Joc joc = new Joc();
@@ -142,7 +144,7 @@ public class Joc {
                 new TimerTask() {
                     @Override
                     public void run() {
-                        apareixerFigures(punts, PanellJoc, btnGuardar);
+                        apareixerFigures(punts, PanellJoc, btnGuardar, menuNovaPartida);
 
                     }
                 },
@@ -151,19 +153,12 @@ public class Joc {
                 dificultat
         );
 
-
-
-
-
-
-
-
     }
 
     /*
         Fa aparèixer figures a la pantalla aleatòriament
      */
-    public static void apareixerFigures(Circle figura[], Pane PanellJoc, Button btnGuardar) {
+    public static void apareixerFigures(Circle figura[], Pane PanellJoc, Button btnGuardar, Menu menuNovaPartida) {
 
         //Fa visible la figura corresponent a l'array.
         figura[iterate].setVisible(true);
@@ -176,14 +171,18 @@ public class Joc {
         double randomX = figura[0].getRadius() + ((PanellJoc.getLayoutBounds().getMaxX() - figura[0].getRadius()) - figura[0].getRadius()) * random.nextDouble();
         double randomY = figura[0].getRadius() + ((PanellJoc.getLayoutBounds().getMaxY() - figura[0].getRadius()) - figura[0].getRadius()) * random.nextDouble();
 
-        /*double randomX = (PanellJoc.getLayoutBounds().getMaxX()) * r.nextDouble();
-        double randomY = (PanellJoc.getLayoutBounds().getMaxY()) * r.nextDouble();*/
-
         //System.out.println("X: "+randomX + " Y:" + randomY);
 
         //Mou la figura a un lloc aleatori del panell de joc gràcies a les variables random que hem creat.
         figura[iterate].setLayoutX(randomX);
         figura[iterate].setLayoutY(randomY);
+
+        //fem que surtin els cercles amb un difuminat...
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), figura[iterate]);
+        fade.setFromValue(0.1);
+        fade.setToValue(1);
+        fade.setCycleCount(1);
+        fade.play();
 
         //Comptem les figures restant que hi ha en pantalla restant de totes les figures que han sortit, els punts aconseguits.
         setFiguresRestantsEnPantalla(getFiguresSortints()-getPunts());
@@ -192,7 +191,7 @@ public class Joc {
 
         //Si les figures que hi ha en pantalla son iguals o superiors a 20, finalitzem el joc i parem el procés.
         if (getFiguresRestantsEnPantalla() >= 20) {
-            finalitzarJoc(btnGuardar, figura);
+            finalitzarJoc(btnGuardar, figura, menuNovaPartida);
             System.out.println("El Joc ha acabat per: 20 figures a la pantalla.");
         }
 
@@ -222,22 +221,25 @@ public class Joc {
         if(getSegons()!=0) {
             setSegons(getSegons()-1);
         } else {
+            lblSegons.setText("0");
             System.out.println("El Joc ha acabat per fora de temps.");
         }
     }
 
-    public static void finalitzarJoc(Button btnGuardar, Circle figura[]) {
+    public static void finalitzarJoc(Button btnGuardar, Circle figura[], Menu menuNovaPartida) {
 
         getFiguresPantalla().cancel();
         getFiguresPantalla().purge();
         getComptadorSegons().stop();
-
 
         for (Circle x : figura){
                 x.setVisible(false);
             }
 
         btnGuardar.setVisible(true);
+
+        //tornem a habilitar el botó de nova partida.
+        menuNovaPartida.setDisable(false);
 
     }
 
