@@ -12,7 +12,10 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements javafx.fxml.Initializable {
 
     @FXML
     private VBox VBoxPrincipal;
@@ -125,6 +128,9 @@ public class Controller {
     @FXML
     private TableColumn<Integer, String> columnaNivell = new TableColumn<>();
 
+    @FXML
+    private Tab tabRanking;
+
     private String menuNom;
 
     public Joc partida = new Joc();
@@ -132,11 +138,6 @@ public class Controller {
 
     @FXML
     void iniciaJoc(ActionEvent event) {
-        columnaNom.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
-        columnaPunts.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
-        columnaNivell.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
-
-        Ranquing.emplenaRanquing(taulaRanquing, columnaNom, columnaPunts, columnaNivell);
 
         /* Desactiva el menú de nova partida un cop començada */
         menuNovaPartida.setDisable(true);
@@ -328,6 +329,7 @@ public class Controller {
          */
         partida.mostraAlerta(menuNom);
         btnGuardaRecord.setVisible(false);
+        Ranquing.emplenaRanquing(taulaRanquing, columnaNom, columnaPunts, columnaNivell);
     }
 
     @FXML
@@ -343,5 +345,13 @@ public class Controller {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        columnaNom.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+        columnaPunts.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+        columnaNivell.prefWidthProperty().bind(taulaRanquing.widthProperty().divide(3));
+
+        Ranquing.emplenaRanquing(taulaRanquing, columnaNom, columnaPunts, columnaNivell);
+    }
 
 }

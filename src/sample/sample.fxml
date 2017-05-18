@@ -214,7 +214,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Rànking">
+          <Tab fx:id="tabRanking" text="Rànking">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
