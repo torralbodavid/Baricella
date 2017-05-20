@@ -1,4 +1,4 @@
-package sample;
+package cat.torralbo.baricella;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;

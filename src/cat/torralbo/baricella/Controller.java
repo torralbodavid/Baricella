@@ -1,4 +1,4 @@
-package sample;
+package cat.torralbo.baricella;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

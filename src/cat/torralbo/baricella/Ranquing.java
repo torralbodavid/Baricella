@@ -1,4 +1,4 @@
-package sample;
+package cat.torralbo.baricella;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.TableColumn;

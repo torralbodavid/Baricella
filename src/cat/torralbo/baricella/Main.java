@@ -1,4 +1,4 @@
-package sample;
+package cat.torralbo.baricella;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
