@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RECORDS>
   <USUARIS>
-    <usuari nom="david" puntuacio="2" nivell="Infern" />
-    <usuari nom="torralbo" puntuacio="3" nivell="Malson" />
-    <usuari nom="DTorralbo" puntuacio="74" nivell="Difícil" />
-    <usuari nom="David" puntuacio="40" nivell="Principiant" />
-    <usuari nom="??" puntuacio="40" nivell="Principiant" />
-    <usuari nom="??" puntuacio="54" nivell="Infern" />
   </USUARIS>
 </RECORDS>
